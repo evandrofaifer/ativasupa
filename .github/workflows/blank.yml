@@ -3,7 +3,7 @@ name: Manter Supabase Ativo
 on:
   schedule:
     - cron: "0 */2 * * *"  # roda a cada 2 horas
-  workflow_dispatch:
+  workflow_dispatch:        # permite rodar manualmente
 
 jobs:
   ping:
@@ -11,4 +11,4 @@ jobs:
     steps:
       - name: Enviar requisição ao Supabase
         run: |
-          curl -I "https://vyjxioxymmxlkzafogrq.supabase.co"
+          curl -I "https://vyjxioxymmxlkzafogrq.supabase.co/rest/v1/"
