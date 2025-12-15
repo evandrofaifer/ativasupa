@@ -1,14 +1,18 @@
-name: Manter Supabase Ativo
+name: Supabase Keep Alive
 
 on:
   schedule:
-    - cron: "0 */2 * * *"  # roda a cada 2 horas
-  workflow_dispatch:        # permite rodar manualmente
+    - cron: "0 3 */5 * *"   # a cada 5 dias
+  workflow_dispatch:
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Enviar requisição ao Supabase
+      - name: Call Supabase REST API
         run: |
-          curl -I "https://vyjxioxymmxlkzafogrq.supabase.co/rest/v1/"
+          curl -X POST "https://vyjxioxymmxlkzafogrq.supabase.co/rest/v1/keep_alive" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d "{}"
